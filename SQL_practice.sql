@@ -116,7 +116,55 @@ SELECT last_name AS 'Last Name',
 FROM person
 GROUP BY 1
 ORDER BY 2 DESC
-LIMIT 10
+LIMIT 10;
+
+-- b) Retrieve the average age of individuals grouped by first name.
+SELECT first_name,
+		AVG(age) AS average_age
+FROM (	SELECT first_name,
+				FLOOR(DATEDIFF(CURRENT_DATE(), date_of_birth) / 365.25) AS age
+		FROM person  
+		WHERE date_of_birth IS NOT NULL) AS derived_table
+GROUP BY 1
+LIMIT 20;
+
+-- c) Write a query that calculates the median age of all individuals in the database.
+
+
+
+
+-- 2 Data Cleaning & Manipulation
+-- a) Find all entries with null or missing last_name values and replace them with 'Unknown'.
+UPDATE person
+SET last_name = 'Unknown'
+WHERE last_name IS NULL or last_name = '';
+
+-- b) Identify and remove duplicate rows based on first_name and last_name.
+-- first I see how many rows are duplicate based on first and last name
+SELECT first_name,
+		last_name,
+		COUNT(*) AS count_of_duplicates
+FROM person  
+GROUP BY 1, 2
+ORDER BY 3 DESC;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -126,6 +174,7 @@ LIMIT 10
 
 
 -- Make sure to commit and push the file:
--- git add .
+-- git status
+-- git add SQL_practice.sql
 -- git commit -m "Updated SQL practice file"
 -- git push
