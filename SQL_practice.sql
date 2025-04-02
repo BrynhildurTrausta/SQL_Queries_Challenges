@@ -110,12 +110,22 @@ INSERT INTO Person (person_id, First_name, Last_name, Date_of_birth) VALUES
 
 
 -- 1 Data Retrieval & Aggregation
--- a Write a query to retrieve the top 10 most common last names from the Person table, along with their frequencies.
+-- a) Write a query to retrieve the top 10 most common last names from the Person table, along with their frequencies.
 SELECT last_name AS 'Last Name',
 		COUNT(*) AS count
 FROM person
 GROUP BY 1
-ORDER BY 2
+ORDER BY 2 DESC
 LIMIT 10
 
 
+
+
+
+
+
+
+-- Make sure to commit and push the file:
+-- git add .
+-- git commit -m "Updated SQL practice file"
+-- git push
