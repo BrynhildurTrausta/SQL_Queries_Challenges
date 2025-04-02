@@ -4,3 +4,9 @@
 *.txt
 *.jpg
 *.png
+.DS_Store
+*.pdf
+*.docx
+*.txt
+*.jpg
+*.png
