@@ -146,13 +146,34 @@ SELECT first_name,
 		COUNT(*) AS count_of_duplicates
 FROM person  
 GROUP BY 1, 2
+HAVING COUNT(*) > 1
 ORDER BY 3 DESC;
 
+-- Second I remove all of the Duplicates based on first and last name
+DELETE p1 -- This deletes rows from the p1 table
+FROM person p1
+LEFT JOIN (SELECT MIN(person_id) AS min_id
+			FROM person
+			GROUP BY first_name, last_name) p2
+ON p1.person_id = p2.min_id
+WHERE p2.min_id IS NULL;
+
+-- c) Convert all first_name entries to lowercase and update the table.
+UPDATE person
+SET first_name = LOWER(first_name);
 
 
 
 
-
+-- 3 Joins & Subqueries
+-- a) Write a query that retrieves all individuals who share the same first_name as someone else in the table.
+SELECT *
+FROM person p1
+LEFT JOIN (SELECT *, COUNT(*) AS duplicates
+			FROM person) p2
+ON p1.person_id = p2.person_id
+WHERE COUNT(*) > 1
+GROUP BY duplicates;
 
 
 
